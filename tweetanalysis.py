@@ -2,7 +2,8 @@ import re
 import tweepy
 from tweepy import OAuthHandler
 from textblob import TextBlob
-
+#import pylab as plt
+#import plotly.plotly as py
  
 class TwitterClient(object):
     '''
@@ -86,7 +87,7 @@ class TwitterClient(object):
  
 def main():
     api = TwitterClient()
-    tweets = api.get_tweets(query = 'github', count = 500)
+    tweets = api.get_tweets(query = 'stock market', count = 500)
     ptweets = [tweet for tweet in tweets if tweet['sentiment'] == 'positive']
    
     print("Positive tweets percentage: {} %".format(100*len(ptweets)/len(tweets)))
@@ -104,6 +105,13 @@ def main():
     print("\n\nNegative tweets:")
     for tweet in ntweets[:10]:
         print(tweet['text'])
+    if (ntweets>ptweets):
+	print ("company is lagging")
+    else:
+        print("company is riasing")
+	
+   
+
  
 if __name__ == "__main__":
 
