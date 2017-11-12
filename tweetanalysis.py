@@ -2,6 +2,7 @@ import re
 import tweepy
 from tweepy import OAuthHandler
 from textblob import TextBlob
+
  
 class TwitterClient(object):
     '''
@@ -12,11 +13,10 @@ class TwitterClient(object):
         Class constructor or initialization method.
         '''
        
-        consumer_key = '18QHFMz0zvycM2KLrTMfrafI1'
-        consumer_secret = 'WNwYGKBXmbfsY7ysZXxPJ4Voa7rgtLxGocuDHbIJ1TZLShtBVF'
-        access_token = '843094924299976704-GNJyLjovEGFAiOWLswFBagKxlebRQUq'
-        access_token_secret = 'L39Wz6lXKSavutPqhopmNwK7egJiSrwRxVohjbqVqbQvM'
- 
+        consumer_key = '1jD5DYXp8OtNi30iRMLvEg1Qk'
+	consumer_secret = 'oU1phe1DbpRETgrUODdyWa8wESARFgSy09KhgLqh5pJMjrIlbY'
+	access_token = '3213716487-1MfLG6KDQpdqAG3dG4MyVjw9yAniE8cYtjPOpBu'
+	access_token_secret = 'djkHKpjasoaKyjskgLlBP2Ip86UYrQRYjf32xQfMeuYmx'
        
         try:
          
@@ -86,7 +86,7 @@ class TwitterClient(object):
  
 def main():
     api = TwitterClient()
-    tweets = api.get_tweets(query = 'Job Opportunities', count = 500)
+    tweets = api.get_tweets(query = 'github', count = 500)
     ptweets = [tweet for tweet in tweets if tweet['sentiment'] == 'positive']
    
     print("Positive tweets percentage: {} %".format(100*len(ptweets)/len(tweets)))
