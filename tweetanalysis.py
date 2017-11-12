@@ -1,10 +1,11 @@
+from __future__ import division
 import re
 import tweepy
 from tweepy import OAuthHandler
 from textblob import TextBlob
-#import pylab as plt
-#import plotly.plotly as py
- 
+import numpy as np
+import matplotlib.pyplot as plt
+
 class TwitterClient(object):
     '''
     Generic Twitter Class for sentiment analysis.
@@ -51,12 +52,13 @@ class TwitterClient(object):
         else:
             return 'negative'
  
-    def get_tweets(self, query, count = 10):
+    def get_tweets(self, query, count = 1000):
         '''
         Main function to fetch tweets and parse them.
         '''
        
         tweets = []
+	query=[]
  
         try:
           
@@ -87,16 +89,22 @@ class TwitterClient(object):
  
 def main():
     api = TwitterClient()
-    tweets = api.get_tweets(query = 'stock market', count = 500)
+    query=['trumph','namo','demonitization','cryptocurrency', 'bitcoin', 'bitcoins', 'ethereum', 'litecoin', 'bitcoinprice', 'blockchain', 'investment', 'investor', 				   			'stockmarket','stocks', 'getrich','makemoney', 'makemoneyonline', 'mentorship', 'mentoring', 'xrp', 'bitfinex','altcoins', 'moneytalks']
+    for x in query:
+    	x = api.get_tweets( query,count = 1000)
+   
+	
+   
+ 
     ptweets = [tweet for tweet in tweets if tweet['sentiment'] == 'positive']
    
-    print("Positive tweets percentage: {} %".format(100*len(ptweets)/len(tweets)))
+    print("Positive tweets percentage: {} %".format(100*len(ptweets)/50))
 
     ntweets = [tweet for tweet in tweets if tweet['sentiment'] == 'negative']
 
-    print("Negative tweets percentage: {} %".format(100*len(ntweets)/len(tweets)))
+    print("Negative tweets percentage: {} %".format(100*len(ntweets)/50))
 
-    print("Neutral tweets percentage: {} % ".format(100*(len(tweets) - len(ntweets) - len(ptweets))/len(tweets)))
+    print("Neutral tweets percentage: {} % ".format(100*(len(tweets) - len(ntweets) - len(ptweets))/70))
  
     print("\n\nPositive tweets:")
     for tweet in ptweets[:10]:
@@ -114,6 +122,5 @@ def main():
 
  
 if __name__ == "__main__":
-
     main()
 
